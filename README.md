@@ -1,4 +1,4 @@
-# Label-Efficient Semantic Segmentation with Diffusion Models
+# Diffusion-Based Semantic Segmentation Using Feature Regularization and Soft Voting
 
 Summer Annual Conference of IEIE 2025
 
