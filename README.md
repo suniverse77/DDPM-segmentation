@@ -63,4 +63,6 @@ Performance in terms of mean IoU:
 &nbsp;
 Examples of segmentation masks predicted by the DDPM-based method:
 
-<center><img src="./images/DDPM-segmentation2.png" width="90%"></center>
+<div style="text-align: center;">
+   <img src="./images/DDPM-segmentation2.png" width="70%">
+</div>
