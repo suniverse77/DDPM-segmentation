@@ -9,10 +9,7 @@ Summer Annual Conference of IEIE 2025
 
 The paper investigates the representations learned by the state-of-the-art DDPMs and shows that they capture high-level semantic information valuable for downstream vision tasks. We design a simple semantic segmentation approach that exploits these representations and outperforms the alternatives in the few-shot operating point.
 
-<div>
-  <img width="100%" alt="DDPM-based Segmentation" src="C:\Users\sunho\Desktop\Potato\GitHub\_images\DDPM-segmentation1.png">
-</div>
-<center><img src='{{"C:\Users\sunho\Desktop\Potato\GitHub\_images\DDPM-segmentation1.png" | relative_url}}' width="100%"></center>
+<center><img src='{{"/images/DDPM-segmentation1.png" | relative_url}}' width="100%"></center>
 
 &nbsp;
 ## Datasets
@@ -58,43 +55,6 @@ FFHQ-256 is trained by ourselves using the same model parameters as for the LSUN
 
 
 &nbsp;
-## DatasetDDPM
-
-
-### Synthetic datasets
-
-To download DDPM-produced synthetic datasets (50000 samples, ~7Gb) (updated 3/8/2022):\
-```bash synthetic-datasets/ddpm/download_synthetic_dataset.sh <dataset_name>```
-
-### Run | Option #1
-
-1. Download the synthetic dataset:\
-&nbsp;&nbsp; ```bash synthetic-datasets/ddpm/download_synthetic_dataset.sh <dataset_name>```
-2. Check paths in ```experiments/<dataset_name>/datasetDDPM.json``` 
-3. Run: ```bash scripts/datasetDDPM/train_deeplab.sh <dataset_name>``` 
-
-### Run | Option #2
-
-1. Download the datasets:\
- &nbsp;&nbsp; ```bash datasets/download_datasets.sh```
-2. Download the DDPM checkpoint:\
- &nbsp;&nbsp; ```bash checkpoints/ddpm/download_checkpoint.sh <checkpoint_name>```
-3. Check paths in ```experiments/<dataset_name>/datasetDDPM.json```
-4. Train an interpreter on a few DDPM-produced annotated samples:\
-   &nbsp;&nbsp; ```bash scripts/datasetDDPM/train_interpreter.sh <dataset_name>```
-5. Generate a synthetic dataset:\
-   &nbsp;&nbsp; ```bash scripts/datasetDDPM/generate_dataset.sh <dataset_name>```\
-   &nbsp;&nbsp;&nbsp; Please specify the hyperparameters in this script for the available resources.\
-   &nbsp;&nbsp;&nbsp; On 8xA100 80Gb, it takes about 12 hours to generate 10000 samples.   
-
-5. Run: ```bash scripts/datasetDDPM/train_deeplab.sh <dataset_name>```\
-   &nbsp;&nbsp; One needs to specify the path to the generated data. See comments in the script.
-
-**Available checkpoint names:** lsun_bedroom, ffhq, lsun_cat, lsun_horse\
-**Available dataset names:** bedroom_28, ffhq_34, cat_15, horse_21
-
-
-&nbsp;
 ## Results
 
 * Performance in terms of mean IoU:
@@ -114,8 +74,4 @@ To download DDPM-produced synthetic datasets (50000 samples, ~7Gb) (updated 3/8/
 &nbsp;
 * Examples of segmentation masks predicted by the DDPM-based method:
 
-<div>
-  <img width="100%" alt="DDPM-based Segmentation" src="https://storage.yandexcloud.net/yandex-research/ddpm-segmentation/figs/examples.png">
-</div>
-
-
+<center><img src='{{"/images/DDPM-segmentation2.png" | relative_url}}' width="100%"></center>
