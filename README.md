@@ -7,7 +7,7 @@ Summer Annual Conference of IEIE 2025
 &nbsp;
 ## Model Architecture
 
-<center><img src='{{"/images/DDPM-segmentation1.png" | relative_url}}' width="100%"></center>
+<center><img src="./images/DDPM-segmentation1.png" width="100%"></center>
 
 &nbsp;
 ## Datasets
