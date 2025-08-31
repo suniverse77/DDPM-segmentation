@@ -7,7 +7,7 @@ Summer Annual Conference of IEIE 2025
 &nbsp;
 ## Model Architecture
 
-<center><img src="./images/DDPM-segmentation1.png" width="100%"></center>
+<center><img src="./images/DDPM-segmentation1.png" width="90%"></center>
 
 &nbsp;
 ## Datasets
@@ -63,4 +63,4 @@ Performance in terms of mean IoU:
 &nbsp;
 Examples of segmentation masks predicted by the DDPM-based method:
 
-<center><img src='{{"/images/DDPM-segmentation2.png" | relative_url}}' width="100%"></center>
+<center><img src="./images/DDPM-segmentation2.png" width="90%"></center>
