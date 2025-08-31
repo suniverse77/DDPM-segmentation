@@ -33,7 +33,6 @@ The models trained on LSUN are adopted from [guided-diffusion](https://github.co
    - Original: ```bash scripts/ddpm/train_ddpm.sh <dataset_name> <result directory> <GPU device num>```
    - ETF: ```bash scripts/ddpm/train_etf.sh <dataset_name> <result directory> <GPU device num>```
 
-&nbsp;
 ### Arguments
 
 **Available checkpoint names**
