@@ -1,5 +1,5 @@
 {
-  "exp_dir": "pixel_classifiers/celeba_19/ddpm",
+  "exp_dir": "results/celeba_19/ddpm",
   "model_type": "ddpm",
   
   "category": "celeba_19",
@@ -9,7 +9,7 @@
   "training_path": "datasets/celeba_19/real/train",
   "validation_path": "datasets/celeba_19/real/train",
   "testing_path": "datasets/celeba_19/real/test",
-  "model_path": "checkpoints/ddpm/ffhq.pt",
+  "model_path": "ddpm_checkpoints/ffhq.pt",
 
   "dim": [256, 256, 8448],
   "steps": [50, 150, 250],

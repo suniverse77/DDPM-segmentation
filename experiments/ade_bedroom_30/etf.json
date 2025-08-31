@@ -1,6 +1,6 @@
 {
-  "exp_dir": "pixel_classifiers/ade_bedroom_30/mae",
-  "model_type": "mae",
+  "exp_dir": "results/ade_bedroom_30/etf",
+  "model_type": "ddpm",
   
   "category": "ade_bedroom_30",
   "number_class": 30,
@@ -9,11 +9,11 @@
   "training_path": "datasets/ade_bedroom_30/real/train",
   "validation_path": "datasets/ade_bedroom_30/real/train",
   "testing_path": "datasets/ade_bedroom_30/real/test",
-  "model_path": "checkpoints/mae/lsun_bedroom.pth",
+  "model_path": "ddpm_checkpoints/lsun_bedroom.pt",
 
-  "dim": [256, 256, 12288],
-  "steps": [],
-  "blocks": [],
+  "dim": [256, 256, 8448],
+  "steps": [50, 150, 250],
+  "blocks": [5, 6, 7, 8, 12],
 
   "model_num": 10,
   "batch_size": 64,
@@ -23,5 +23,7 @@
   "training_number": 50,
   "testing_number": 650,
 
+  "share_noise": true,
   "input_activations": false
-}
+ }
+

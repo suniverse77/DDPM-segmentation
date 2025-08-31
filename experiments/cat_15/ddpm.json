@@ -1,5 +1,5 @@
 {
-  "exp_dir": "pixel_classifiers/cat_15/ddpm",
+  "exp_dir": "results/cat_15/ddpm",
   "model_type": "ddpm",
   
   "category": "cat_15",
@@ -9,7 +9,7 @@
   "training_path": "datasets/cat_15/real/train",
   "validation_path": "datasets/cat_15/ddpm",
   "testing_path": "datasets/cat_15/real/test",
-  "model_path": "checkpoints/ddpm/lsun_cat.pt",
+  "model_path": "ddpm_checkpoints/lsun_cat.pt",
 
   "dim": [256, 256, 8448],
   "steps": [50, 150, 250],

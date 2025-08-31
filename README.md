@@ -9,6 +9,9 @@ Summer Annual Conference of IEIE 2025
 
 The paper investigates the representations learned by the state-of-the-art DDPMs and shows that they capture high-level semantic information valuable for downstream vision tasks. We design a simple semantic segmentation approach that exploits these representations and outperforms the alternatives in the few-shot operating point.
 
+<div>
+  <img width="100%" alt="DDPM-based Segmentation" src="C:\Users\sunho\Desktop\Potato\GitHub\_images\DDPM-segmentation1.png">
+</div>
 <center><img src='{{"C:\Users\sunho\Desktop\Potato\GitHub\_images\DDPM-segmentation1.png" | relative_url}}' width="100%"></center>
 
 &nbsp;

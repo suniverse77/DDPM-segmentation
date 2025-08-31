@@ -1,6 +1,6 @@
 {
-  "exp_dir": "pixel_classifiers/ffhq_34/mae",
-  "model_type": "mae",
+  "exp_dir": "results/ffhq_34/etf",
+  "model_type": "ddpm",
   
   "category": "ffhq_34",
   "number_class": 34,
@@ -9,11 +9,11 @@
   "training_path": "datasets/ffhq_34/real/train",
   "validation_path": "datasets/ffhq_34/ddpm",
   "testing_path": "datasets/ffhq_34/real/test",
-  "model_path": "checkpoints/mae/ffhq.pth",
+  "model_path": "ddpm_checkpoints/ffhq.pt",
 
-  "dim": [256, 256, 12288],
-  "steps": [],
-  "blocks": [],
+  "dim": [256, 256, 8448],
+  "steps": [50, 150, 250],
+  "blocks": [5, 6, 7, 8, 12],
 
   "model_num": 10,
   "batch_size": 64,
@@ -23,5 +23,6 @@
   "testing_number": 20,
 
   "upsample_mode":"bilinear",
+  "share_noise": true,
   "input_activations": false
-}
+ }

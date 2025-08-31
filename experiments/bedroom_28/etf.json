@@ -1,6 +1,6 @@
- {
-  "exp_dir": "pixel_classifiers/bedroom_28/swav",
-  "model_type": "swav",
+{
+  "exp_dir": "results/bedroom_28/etf",
+  "model_type": "ddpm",
   
   "category": "bedroom_28",
   "number_class": 29,
@@ -9,19 +9,21 @@
   "training_path": "datasets/bedroom_28/real/train",
   "validation_path": "datasets/bedroom_28/ddpm",
   "testing_path": "datasets/bedroom_28/real/test",
-  "model_path": "checkpoints/swav/lsun_bedroom.pth",
+  "model_path": "ddpm_checkpoints/lsun_bedroom.pt",
 
-  "dim": [256, 256, 6720],
-  "steps": [],
-  "blocks": [],
+  "dim": [256, 256, 8448],
+  "steps": [50, 150, 250],
+  "blocks": [5, 6, 7, 8, 12],
 
   "model_num": 10,
   "batch_size": 64,
   "max_training": 30,
   
-  "training_number": 40,
+  "training_number": 40,  
   "testing_number": 20,
 
   "upsample_mode":"bilinear",
-  "input_activations": true
-}
+  "share_noise": true,
+  "input_activations": false
+ }
+

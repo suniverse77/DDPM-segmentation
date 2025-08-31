@@ -36,11 +36,7 @@ class FeatureDataset(Dataset):
     :param X_data: pixel representations [num_pixels, feature_dim]
     :param y_data: pixel labels [num_pixels]
     '''
-    def __init__(
-        self, 
-        X_data: torch.Tensor, 
-        y_data: torch.Tensor
-    ):    
+    def __init__(self, X_data: torch.Tensor, y_data: torch.Tensor):    
         self.X_data = X_data
         self.y_data = y_data
 
@@ -96,9 +92,7 @@ class ImageLabelDataset(Dataset):
         # Load a corresponding mask and resize it to (self.resolution, self.resolution)
         label_path = self.label_paths[idx]
         label = np.load(label_path).astype('uint8')
-        label = cv2.resize(
-            label, (self.resolution, self.resolution), interpolation=cv2.INTER_NEAREST
-        )
+        label = cv2.resize(label, (self.resolution, self.resolution), interpolation=cv2.INTER_NEAREST)
         tensor_label = torch.from_numpy(label)
         return tensor_image, tensor_label
 
@@ -145,7 +139,3 @@ class InMemoryImageLabelDataset(Dataset):
         )
         tensor_label = torch.from_numpy(label)
         return tensor_image, tensor_label
-
-
-
-

@@ -1,6 +1,7 @@
 import sys
 import torch
-from torch import nn
+import torch.nn as nn
+import torch.nn.functional as F
 from typing import List
 
 
@@ -9,6 +10,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 def create_feature_extractor(model_type, **kwargs):
     """ Create the feature extractor for <model_type> architecture. """
+    print("")
     if model_type == 'ddpm':
         print("Creating DDPM Feature Extractor...")
         feature_extractor = FeatureExtractorDDPM(**kwargs)
@@ -25,12 +27,11 @@ def create_feature_extractor(model_type, **kwargs):
         raise Exception(f"Wrong model type: {model_type}")
     return feature_extractor
 
-
+# Detach and Transform float type features & Save features in module as attribute
 def save_tensors(module: nn.Module, features, name: str):
     """ Process and save activations in the module. """
     if type(features) in [list, tuple]:
-        features = [f.detach().float() if f is not None else None 
-                    for f in features]
+        features = [f.detach().float() if f is not None else None for f in features]
         setattr(module, name, features)
     elif isinstance(features, dict):
         features = {k: f.detach().float() for k, f in features.items()}
@@ -38,12 +39,12 @@ def save_tensors(module: nn.Module, features, name: str):
     else:
         setattr(module, name, features.detach().float())
 
-
+# Save output named 'activations' in module
 def save_out_hook(self, inp, out):
     save_tensors(self, out, 'activations')
     return out
 
-
+# Save input named 'activations' in module
 def save_input_hook(self, inp, out):
     save_tensors(self, inp[0], 'activations')
     return out
@@ -67,7 +68,6 @@ class FeatureExtractor(nn.Module):
 
     def _load_pretrained_model(self, model_path: str, **kwargs):
         pass
-
 
 class FeatureExtractorDDPM(FeatureExtractor):
     ''' 
@@ -97,9 +97,7 @@ class FeatureExtractorDDPM(FeatureExtractor):
         expected_args = {name: kwargs[name] for name in argnames}
         self.model, self.diffusion = create_model_and_diffusion(**expected_args)
         
-        self.model.load_state_dict(
-            dist_util.load_state_dict(model_path, map_location="cpu")
-        )
+        self.model.load_state_dict(dist_util.load_state_dict(model_path, map_location="cpu"))
         self.model.to(dist_util.dev())
         if kwargs['use_fp16']:
             self.model.convert_to_fp16()
@@ -121,7 +119,6 @@ class FeatureExtractorDDPM(FeatureExtractor):
 
         # Per-layer list of activations [N, C, H, W]
         return activations
-
 
 class FeatureExtractorMAE(FeatureExtractor):
     ''' 
@@ -172,7 +169,6 @@ class FeatureExtractorMAE(FeatureExtractor):
         # Per-layer list of activations [N, C, H, W]
         return activations
 
-
 class FeatureExtractorSwAV(FeatureExtractor):
     ''' 
     Wrapper to extract features from pretrained SwAVs 
@@ -213,7 +209,6 @@ class FeatureExtractorSwAV(FeatureExtractor):
         # Per-layer list of activations [N, C, H, W]
         return activations
     
-
 class FeatureExtractorSwAVw2(FeatureExtractorSwAV):
     ''' 
     Wrapper to extract features from twice wider pretrained SwAVs 
@@ -231,16 +226,22 @@ class FeatureExtractorSwAVw2(FeatureExtractorSwAV):
         self.model = model.module.eval()
 
 
+# Upsample activations and concatenate them to form a feature tensor
 def collect_features(args, activations: List[torch.Tensor], sample_idx=0):
-    """ Upsample activations and concatenate them to form a feature tensor """
     assert all([isinstance(acts, torch.Tensor) for acts in activations])
+
     size = tuple(args['dim'][:-1])
     resized_activations = []
+
+    #print(len(activations))
+
     for feats in activations:
         feats = feats[sample_idx][None]
-        feats = nn.functional.interpolate(
-            feats, size=size, mode=args["upsample_mode"]
-        )
-        resized_activations.append(feats[0])
+        upsampled_feats = F.interpolate(feats, size=size, mode=args["upsample_mode"], align_corners=False)
+        resized_activations.append(upsampled_feats[0])
+        #print(f'{feats.shape} -> {upsampled_feats.shape}')
     
-    return torch.cat(resized_activations, dim=0)
+    concated_feats = torch.cat(resized_activations, dim=0)
+    #print(concated_feats.shape)
+
+    return concated_feats

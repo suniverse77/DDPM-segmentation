@@ -1,6 +1,6 @@
- {
-  "exp_dir": "pixel_classifiers/cat_15/swav_w2",
-  "model_type": "swav_w2",
+{
+  "exp_dir": "results/cat_15/etf",
+  "model_type": "ddpm",
   
   "category": "cat_15",
   "number_class": 15,
@@ -9,11 +9,11 @@
   "training_path": "datasets/cat_15/real/train",
   "validation_path": "datasets/cat_15/ddpm",
   "testing_path": "datasets/cat_15/real/test",
-  "model_path": "checkpoints/swav_w2/lsun_cat.pth",
+  "model_path": "ddpm_checkpoints/lsun_cat.pt",
 
-  "dim": [256, 256, 13440],
-  "steps": [],
-  "blocks": [],
+  "dim": [256, 256, 8448],
+  "steps": [50, 150, 250],
+  "blocks": [5, 6, 7, 8, 12],
 
   "model_num": 10,
   "batch_size": 64,
@@ -23,5 +23,6 @@
   "testing_number": 20,
 
   "upsample_mode":"bilinear",
-  "input_activations": true
-}
+  "share_noise": true,
+  "input_activations": false
+ }
